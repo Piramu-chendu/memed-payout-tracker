@@ -2,6 +2,10 @@
 
 A full-stack campaign management and creator payout platform. Brands create campaigns with budgets and view-based payout milestones. Creators browse live campaigns, submit social media posts, track views, and view their earnings.
 
+**Live Application:** https://memed-payout-tracker-ten.vercel.app/
+
+**Backend Health Check:** Replace this with your actual Render backend URL followed by `/api/health`.
+
 ## Project Structure
 
 ```text
@@ -203,9 +207,9 @@ Never commit `.env`, `.env.local`, `.env.test`, database credentials, or product
 - The application uses JWT-based authentication and role-based access control for brand and creator workflows.
 - Payment settlement and real social platform verification are outside the current simulated payout workflow.
 
-## Scaling Considerations
+## Scaling to 10,000 Creators
 
-For production use, social platform integrations should verify views and post ownership. Payout allocation should remain atomic and idempotent. A larger deployment could introduce a queue for view updates, background jobs for reconciliation, rate limiting, structured monitoring, and audit logs. MongoDB transaction support and suitable indexes are important for maintaining budget correctness under concurrent traffic.
+To support 10,000 creators, I would scale the API horizontally behind a load balancer and keep the frontend and backend independently deployable. MongoDB indexes would optimize campaign and submission queries, while pagination would prevent large lists from loading at once. View updates could be processed through a durable queue and background workers. Atomic database transactions and idempotency checks would ensure simultaneous or repeated updates cannot allocate the same payout twice or exceed a campaign budget. Social-platform integrations would verify post ownership and view counts instead of trusting client-supplied values. Redis could cache live campaign listings with short expiration times and appropriate invalidation. Rate limiting, structured logs, monitoring, alerts, and audit records would help detect unusual activity and investigate payout disputes. Finally, load and concurrency tests would guide database connection-pool settings, worker concurrency, and capacity planning.
 
 ## Deployment
 
