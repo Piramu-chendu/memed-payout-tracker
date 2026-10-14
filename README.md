@@ -4,7 +4,7 @@ A full-stack campaign management and creator payout platform. Brands create camp
 
 **Live Application:** https://memed-payout-tracker-ten.vercel.app/
 
-**Backend Health Check:** Replace this with your actual Render backend URL followed by `/api/health`.
+**Backend Health Check:** https://memed-payout-tracker-api.onrender.com/api/health
 
 ## Project Structure
 
